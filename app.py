@@ -125,7 +125,7 @@ if __name__ == '__main__':
 
 def lambda_handler(event, context):
     try:
-        key = urllib.unquote_plus(event['Records'][0]['s3']['object']['key'])
+        key = urllib.parse.unquote_plus(event['Records'][0]['s3']['object']['key'])
         main(key)
     except Exception as error:
         print("Failed to process trading information " + str(error))
