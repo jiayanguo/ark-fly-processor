@@ -124,8 +124,11 @@ if __name__ == '__main__':
     main(OBJECT_KEY_PATTERN.format(today="2020-12-24"))
 
 def lambda_handler(event, context):
-    key = urllib.unquote_plus(event['Records'][0]['s3']['object']['key'])
-    main(key)
+    try:
+        key = urllib.unquote_plus(event['Records'][0]['s3']['object']['key'])
+        main(key)
+    except Exception as error:
+        print("Failed to process trading information " + str(error))
     return {
         "status":200
     }
