@@ -91,6 +91,7 @@ def find_tradings(object_key):
     obj = get_from_s3(object_key)
     if obj:
         for row in csv.DictReader(codecs.getreader("utf-8")(obj["Body"])):
+            del row['']
             if row['Direction'] == 'Buy':
                 ark_trading_map[row['Fund'].upper()].append(row)
 
