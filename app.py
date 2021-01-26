@@ -66,7 +66,7 @@ def find_new_holdings(today, object_key):
     for key, value in ark_trading_map.items():
         find_holdings(today, key)
         if value:
-            new_holding_map[key] = [x for x in value if x['Ticker'] not in ark_holding_map[key]]
+            new_holding_map[key] = [x for x in value if x['CUSIP'] not in ark_holding_map[key]]
 
 def get_date():
     tz = timezone('EST')
@@ -80,7 +80,7 @@ def find_holdings(date, fund):
         obj = get_from_s3(HOLDING_OBJECT_KEY_PATTERN.format(date = date, fund=fund.lower()))
         for row in csv.DictReader(codecs.getreader("utf-8")(obj["Body"])):
             if row['fund']:
-                ark_holding_map[row['fund'].upper()].append(row['ticker'])
+                ark_holding_map[row['fund'].upper()].append(row['cusip'])
     except ClientError as ex:
         if ex.response['Error']['Code'] == 'NoSuchKey':
             find_holdings(date, fund)
