@@ -17,6 +17,7 @@ ARKG = "ARKG"
 ARKF = "ARKF"
 PRNT = "PRNT"
 IZRL = "IZRL"
+ARKX = "ARKX"
 
 S3_BUCKET ="ark-fly"
 OBJECT_KEY_PATTERN="newholdings/{today}-trading.csv"
@@ -30,7 +31,8 @@ ark_trading_map = {
     ARKG: [],
     ARKF: [],
     PRNT: [],
-    IZRL: []
+    IZRL: [],
+    ARKX: []
 }
 
 ark_holding_map = {
@@ -40,7 +42,8 @@ ark_holding_map = {
     ARKG: [],
     ARKF: [],
     PRNT: [],
-    IZRL: []
+    IZRL: [],
+    ARKX: []
 }
 
 new_holding_map = {
@@ -50,7 +53,8 @@ new_holding_map = {
     ARKG: [],
     ARKF: [],
     PRNT: [],
-    IZRL: []
+    IZRL: [],
+    ARKX: []
 }
 
 def get_from_s3(object_name):
