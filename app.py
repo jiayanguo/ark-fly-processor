@@ -121,8 +121,11 @@ def main(object_key):
         if value:
             result.extend(value)
     if result:
+        print("Found new holdings.")
         save_to_csv(result)
-    upload_to_s3(today)
+        upload_to_s3(today)
+    else:
+        print ("No new holdings")
 
 if __name__ == '__main__':
     main(TRADING_OBJECT_KEY_PATTERN.format(today="2021-10-11"))
