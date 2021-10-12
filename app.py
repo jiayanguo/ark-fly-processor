@@ -95,7 +95,6 @@ def find_tradings(object_key):
     obj = get_from_s3(object_key)
     if obj:
         for row in csv.DictReader(codecs.getreader("utf-8")(obj["Body"])):
-            del row['']
             if row['Direction'] == 'Buy':
                 ark_trading_map[row['Fund'].upper()].append(row)
 
@@ -112,7 +111,7 @@ def upload_to_s3(date):
     try:
         response = client.upload_file(TMP_NEW_HOLDINGS_FILE, S3_BUCKET, OBJECT_KEY_PATTERN.format(today=date))
     except Exception as error:
-        raise Exception("faile to upload to s3! " + str(error))
+        raise Exception("Failed to upload to s3! " + str(error))
 
 def main(object_key):
     today = get_date()
@@ -126,7 +125,7 @@ def main(object_key):
     upload_to_s3(today)
 
 if __name__ == '__main__':
-    main(OBJECT_KEY_PATTERN.format(today="2020-12-24"))
+    main(TRADING_OBJECT_KEY_PATTERN.format(today="2021-10-11"))
 
 def lambda_handler(event, context):
     try:
