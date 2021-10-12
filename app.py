@@ -59,6 +59,7 @@ new_holding_map = {
 
 def get_from_s3(object_name):
     client = boto3.client('s3')
+    print("Get objects from s3: " + object_name)
     try:
         response = client.get_object(Bucket = S3_BUCKET, Key = object_name)
         return response
